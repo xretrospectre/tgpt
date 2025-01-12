@@ -88,6 +88,8 @@ func NewRequest(input string, params structs.Params, prevMessages string) (*http
 	model := "gpt-4o-mini"
 	if params.ApiModel != "" {
 		model = params.ApiModel
+	} else if envModel := os.Getenv("DUCKDUCKGO_MODEL"); envModel != "" {
+		model = envModel
 	}
 
 	safeInput, _ := json.Marshal(input)
